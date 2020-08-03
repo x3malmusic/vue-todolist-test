@@ -1,0 +1,18 @@
+.app-button {
+  padding: 10px;
+  background-color: #72ffad;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color .2s ease-in;
+  border: none;
+  outline: none;
+
+  &:not(:disabled):hover {
+    background-color: #00ff46;
+  }
+
+  &:active {
+    transform: scale(1.02);
+  }
+}

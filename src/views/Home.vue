@@ -1,18 +1,41 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <app-button name="Create Todo" @click="createTodo" />
+    <create-todo
+      v-if="createTodoFlag"
+      @closeAddTodo="createTodo"
+      :create="true"
+    />
+    <h1 v-if="!todos.length">no todos</h1>
+    <div class="todos" v-else>
+      <todo-card v-for="todo in todos" :todo="todo" :key="todo.id" />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import AppButton from "../components/AppButton";
+import TodoCard from "../components/TodoCard";
+import CreateTodo from "../components/CreateEditTodo";
+import { mapState } from "vuex";
 
 export default {
   name: "Home",
+  data: () => ({
+    createTodoFlag: false
+  }),
   components: {
-    HelloWorld
+    AppButton,
+    TodoCard,
+    CreateTodo
+  },
+  computed: {
+    ...mapState(["todos"])
+  },
+  methods: {
+    createTodo() {
+      this.createTodoFlag = !this.createTodoFlag;
+    }
   }
 };
 </script>
